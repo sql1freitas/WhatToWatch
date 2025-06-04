@@ -1,3 +1,12 @@
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=fff" alt="Python">
+  <img src="https://img.shields.io/badge/FastAPI-0.110+-009688?logo=fastapi&logoColor=fff" alt="FastAPI">
+  <img src="https://img.shields.io/badge/tmdbsimple-API-01b4e4?logo=themoviedatabase&logoColor=fff" alt="TMDB API">
+  <img src="https://img.shields.io/badge/Frontend-HTML5%20%7C%20CSS3%20%7C%20JS-e34c26?logo=html5&logoColor=fff" alt="Frontend">
+</p>
+
+
 # 🎬 What To Watch?
 
 Bem-vindo ao **What To Watch?** – o seu site para nunca mais sofrer escolhendo o que assistir!  
