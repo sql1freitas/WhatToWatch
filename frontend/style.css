@@ -22,57 +22,22 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
-  padding: 40px 20px 140px;
-  padding-bottom: 120px;
-}
-
-
-.step {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  gap: 2.3vh;
+  padding: 40px 2vw clamp(85px, 15vw, 120px);
   width: 100%;
-  opacity: 0;
-  transition: opacity 0.4s;
-  pointer-events: none;
-  margin: 0;
-  padding: 20px;
   box-sizing: border-box;
 }
 
-
-
-.step.active {
-  display: flex;
-  opacity: 1;
-  pointer-events: auto;
-}
-
-#step3 {
-  min-height: 70vh;
-  padding-bottom: 110px;
-  box-sizing: border-box;
-}
-
-.genre-surprise-row {
-  display: flex;
-  justify-content: center;
-  margin-top: 18px;
-  margin-bottom: 60px;
-}
-
-
+/* Responsivo para logo */
 .logo {
-  width: 340px;
+  width: clamp(180px, 38vw, 340px);
   max-width: 88vw;
   display: block;
   animation: floatLogo 3.2s ease-in-out infinite alternate;
   filter: drop-shadow(0 12px 32px #a084e899) drop-shadow(0 2px 12px #000c);
   transition: filter 0.4s;
   will-change: filter;
-  margin: 0 auto 24px auto; /* <-- centraliza horizontalmente */
+  margin: 0 auto clamp(2vh, 24px, 24px) auto;
 }
 
 .logo:hover, .logo:focus {
@@ -88,9 +53,9 @@ body {
 .subtitle {
   font-family: 'Quicksand', Arial, sans-serif;
   font-weight: 600;
-  font-size: 2.2rem;
+  font-size: clamp(1.2rem, 3.5vw, 2.2rem);
   color: #fff;
-  margin-bottom: 36px;
+  margin-bottom: clamp(12px, 5vh, 36px);
   margin-top: 0;
   text-align: center;
   text-shadow: 0 3px 16px #000a, 0 1px 0 #a084e855;
@@ -106,13 +71,14 @@ body {
   margin-bottom: 0;
 }
 
+/* Botão CTA (Etapa 1) */
 .cta {
   display: flex;
   align-items: center;
-  padding: 10px 45px;
+  padding: 10px 6vw;
   text-decoration: none;
   font-family: 'Poppins', sans-serif;
-  font-size: 2.3rem;
+  font-size: clamp(1.1rem, 2.3vw, 2.3rem);
   color: white;
   background: #FFA12B;
   transition: 0.5s;
@@ -152,7 +118,6 @@ body {
   top: 12%;
 }
 
-
 .cta path.one {
   transition: 0.4s;
   transform: translateX(-60%);
@@ -178,6 +143,28 @@ body {
   100% { fill: white; }
 }
 
+/* Etapas */
+.step {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.step.active {
+  display: flex;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Botões de escolha padrão */
 .button3d {
   position: relative;
   display: inline-block;
@@ -187,22 +174,23 @@ body {
 .button3d button {
   color: white;
   font-family: 'Luckiest Guy', cursive, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: clamp(1.08rem, 2.1vw, 2rem);
   text-align: center;
   text-decoration: none;
   background-color: #FFA12B;
   display: block;
   position: relative;
-  padding: 20px 40px;
+  padding: clamp(12px, 2.5vw, 20px) clamp(28px, 5vw, 40px);
   text-shadow: 0px 2px 0px #000;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   box-shadow: inset 0 1px 0 #FFE5C4, 0 10px 0 #915100;
   transition: all 0.1s ease-in-out;
   z-index: 2;
+  min-width: 100px;
+  min-height: 0;
 }
 
 .button3d button:active {
@@ -225,7 +213,7 @@ body {
   pointer-events: none;
 }
 
-
+/* Container de escolhas padrão */
 .choices {
   display: flex;
   flex-direction: column;
@@ -236,22 +224,18 @@ body {
   padding-top: 5px;
 }
 
+/* Etapa 3: Botões de gênero (grid responsivo) */
 .choices.genres {
   display: grid;
-  grid-template-columns: repeat(2, minmax(120px, 1fr));
-  gap: 22px 32px; /* vertical x horizontal */
+  grid-template-columns: repeat(2, minmax(110px, 1fr));
+  gap: clamp(10px, 3vw, 22px) clamp(12px, 5vw, 32px);
+  width: min(94vw, 480px);
+  margin: 0 auto;
+  padding: 1vh 0 0 0;
   justify-content: center;
   align-items: center;
-  padding: 8px 0 0 0;
-  margin-top: 8px;
-  margin-bottom: 0;
-  width: 100%;
-  max-width: 480px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
-/* Ajusta o tamanho do botão para não ficar tão alto/largo */
 .choices.genres .button3d {
   min-width: 0;
   max-width: 100%;
@@ -261,20 +245,19 @@ body {
 
 .choices.genres .button3d button {
   width: 100%;
-  padding: 18px 0;
-  font-size: 1.5rem;
-  min-width: 0;
-  min-height: 0;
+  padding: clamp(10px, 3vh, 18px) 0;
+  font-size: clamp(1.08rem, 2.1vw, 1.5rem);
 }
 
-/* Centraliza o botão surpresa (caveira) abaixo do grid */
 .genre-surprise-row {
   display: flex;
   justify-content: center;
-  margin-top: 18px;
+  margin-top: clamp(10px, 3vw, 18px);
+  margin-bottom: clamp(30px, 8vw, 60px);
+  width: 100%;
 }
 
-
+/* Rodapé redes sociais fixo e responsivo */
 .social {
   display: flex;
   gap: 40px;
@@ -317,9 +300,34 @@ body {
   filter: invert(0) brightness(1.5) drop-shadow(0 0 8px #ff9900cc);
 }
 
+@media (max-width: 1000px) {
+  .logo { width: clamp(120px, 60vw, 260px); }
+  .choices.genres { width: 98vw; }
+}
 
 @media (max-width: 700px) {
-  .centerbox, #step3 {
-    padding-bottom: 150px;
+  .logo { width: clamp(120px, 60vw, 200px) !important; margin-bottom: 16px; }
+  .subtitle { font-size: clamp(1.0rem, 2.2vw, 1.16rem); margin-bottom: 20px; }
+  .wrapper { margin-top: 0; margin-bottom: 0; }
+  .cta { font-size: clamp(0.95rem, 2vw, 1.1rem); padding: 10px 10vw; }
+  .choices.genres {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 5vw;
+    width: 98vw;
   }
+  .choices.genres .button3d button { font-size: 1.13rem; padding: 12px 0; }
+  .choices { gap: 10px; margin-top: 4px; }
+  .centerbox { padding-bottom: clamp(90px, 23vw, 150px);}
+  .genre-surprise-row { margin-bottom: clamp(32px, 14vw, 90px); }
+  .icon-bg { width: 40px; height: 40px; }
+  .social img { width: 18px; height: 18px; }
+  .social { gap: 18px; bottom: 8px; }
+}
+
+/* Pequenos ajustes extras para telas super pequenas */
+@media (max-width: 400px) {
+  .logo { width: 90vw !important; }
+  .cta { font-size: 0.87rem; }
+  .choices.genres { gap: 9px 2vw; }
+  .subtitle { font-size: 0.95rem; }
 }

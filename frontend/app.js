@@ -51,15 +51,20 @@ window.addEventListener('DOMContentLoaded', initStars);
 window.addEventListener('resize', () => setTimeout(initStars, 200));
 
 
-function showStep(stepNum) {
-  document.querySelectorAll('.step').forEach((s, idx) => {
-    if ((idx+1) === stepNum) {
-      s.classList.add('active');
-    } else {
-      s.classList.remove('active');
-    }
+function showStep(stepNumber) {
+  document.querySelectorAll('.step').forEach((el, idx) => {
+    el.classList.toggle('active', idx === stepNumber - 1);
   });
+  const socialFooter = document.getElementById('social');
+  if (socialFooter) {
+    if (stepNumber === 1) {
+      socialFooter.style.display = 'flex';
+    } else {
+      socialFooter.style.display = 'none';
+    }
+  }
 }
+
 
 document.addEventListener('DOMContentLoaded', function() {
   showStep(1);
@@ -71,7 +76,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   document.querySelectorAll('.choiceBtn').forEach(btn => {
     btn.addEventListener('click', function() {
-      // Avança para etapa 3 ao clicar em qualquer botão da etapa 2
       showStep(3);
     });
   });
@@ -85,13 +89,3 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-function adjustPaddingForFooter() {
-  var footer = document.querySelector('.social');
-  var centerbox = document.querySelector('.centerbox');
-  if (footer && centerbox) {
-    var footerHeight = footer.offsetHeight + 32; // 32px de margem extra
-    centerbox.style.paddingBottom = footerHeight + 'px';
-  }
-}
-window.addEventListener('resize', adjustPaddingForFooter);
-window.addEventListener('DOMContentLoaded', adjustPaddingForFooter);
