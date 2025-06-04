@@ -90,14 +90,14 @@ main.step-1 {
   font-size: 2.3rem;
   letter-spacing: 1px;
   color: #fff;
-  background: #b36a03;
+  background: #ff8800;
   border: none;
   border-radius: 14px;
   transition: box-shadow 0.4s, transform 0.2s, background 0.3s;
   box-shadow: 7px 7px 0 #222;
   transform: skewX(-10deg);
   position: relative;
-  text-shadow: 2px 2px 0 #222, 0 2px 8px #ff990099;
+  text-shadow: 2px 2px 0 #222, 0 2px 8px #361f00;
   cursor: pointer;
   outline: none;
 }
@@ -107,8 +107,8 @@ main.step-1 {
 }
 
 .cta:hover {
-  box-shadow: 13px 13px 0 #ffd580;
-  background: #ff9900;
+  box-shadow: 13px 13px 0 #fdc04f;
+  background: #ff8800;
   transition: 0.3s;
 }
 
@@ -145,7 +145,7 @@ path.two {
 
 .cta:hover path.three {
   animation: color_anim 1s infinite 0.2s;
-  fill: #ffd580;
+  fill: #ffab04;
 }
 
 .cta:hover path.one {
