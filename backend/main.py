@@ -44,6 +44,8 @@ GENRES = {
 
 TRASH_KEYWORDS = ["trash", "bad movie", "cult", "so bad it's good"]
 
+MIN_VOTE_COUNT = 100000
+
 @app.get("/api/sortear")
 def sortear_filme(
     perfil: str = Query(..., regex="^(critica|bom-gosto|tanto-faz)$"),
@@ -70,11 +72,15 @@ def sortear_filme(
             seen = set()
             filtered = []
             for movie in results:
-                if movie['id'] not in seen and movie.get('vote_average', 0) >= nota_min:
+                if (
+                    movie['id'] not in seen
+                    and movie.get('vote_average', 0) >= nota_min
+                    and movie.get('vote_count', 0) >= MIN_VOTE_COUNT
+                ):
                     filtered.append(movie)
                     seen.add(movie['id'])
             filmes = filtered
-            print(f"DEBUG: {len(filmes)} filmes 'trash' após filtro de nota")
+            print(f"DEBUG: {len(filmes)} filmes 'trash' após filtro de nota e votos")
         else:
             genre_id = GENRES[genero]
             filmes = []
@@ -85,13 +91,19 @@ def sortear_filme(
                 response = discover.movie(
                     with_genres=genre_id,
                     vote_average_gte=nota_min,
+                    vote_count_gte=MIN_VOTE_COUNT,
                     sort_by="popularity.desc",
                     language="pt-BR",
                     page=page
                 )
                 print(f"DEBUG: Página {page} - {len(discover.results)} resultados brutos do TMDB")
-                page_filmes = [f for f in discover.results if f.get('vote_average', 0) >= nota_min and f['id'] not in anteriores_ids]
-                print(f"DEBUG: Página {page} - {len(page_filmes)} filmes após filtro de nota/anteriores")
+                page_filmes = [
+                    f for f in discover.results
+                    if f.get('vote_average', 0) >= nota_min
+                    and f.get('vote_count', 0) >= MIN_VOTE_COUNT
+                    and f['id'] not in anteriores_ids
+                ]
+                print(f"DEBUG: Página {page} - {len(page_filmes)} filmes após filtro de nota/votos/anteriores")
                 filmes += page_filmes
                 page += 1
 
@@ -112,6 +124,7 @@ def sortear_filme(
             "title": filme.get("title"),
             "poster_path": f"https://image.tmdb.org/t/p/w500{filme['poster_path']}" if filme.get("poster_path") else None,
             "vote_average": filme.get("vote_average"),
+            "vote_count": filme.get("vote_count"),
             "overview": filme.get("overview"),
             "release_date": filme.get("release_date")
         }
