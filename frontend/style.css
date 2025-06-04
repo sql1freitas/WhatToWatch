@@ -349,3 +349,99 @@ body {
   0% { transform: rotate(0deg);}
   100% { transform: rotate(360deg);}
 }
+
+#step4 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-height: 70vh;
+  width: 100%;
+  justify-content: flex-start;
+  padding-top: 24px;
+  padding-bottom: 0;
+}
+
+.movie-title {
+  font-family: 'Luckiest Guy', cursive, Arial, sans-serif;
+  font-size: clamp(1.5rem, 4vw, 2.8rem);
+  color: #fff;
+  margin: 2.5vh 0 1vh 0;
+  text-shadow: 0 3px 16px #000a, 0 1px 0 #a084e855;
+  letter-spacing: 1px;
+}
+
+.movie-poster-box {
+  margin: 0 auto 2.5vh auto;
+  border: 2px solid #fff;
+  background: #181726;
+  border-radius: 16px;
+  box-shadow: 0 6px 32px #0008;
+  width: clamp(180px, 42vw, 320px);
+  height: clamp(260px, 58vw, 460px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.movie-poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+.result-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4vw;
+  margin: 2.5vh 0 1.6vh 0;
+}
+
+.result-actions .button3d {
+  min-width: 140px;
+}
+
+.donate-message {
+  margin-top: 1.8vh;
+  font-size: 1.1rem;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Quicksand', Arial, sans-serif;
+}
+
+.donate-message .pix-key {
+  font-weight: bold;
+  color: #ffa12b;
+}
+
+.result-social {
+  margin: 0 auto;
+  gap: 16px;
+  position: static;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 700px) {
+  #step4 {
+    padding-top: 10px;
+    min-height: 60vh;
+  }
+  .movie-poster-box {
+    width: clamp(120px, 80vw, 230px);
+    height: clamp(180px, 120vw, 340px);
+  }
+  .movie-title {
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
+  }
+  .donate-message {
+    font-size: 0.98rem;
+  }
+}
