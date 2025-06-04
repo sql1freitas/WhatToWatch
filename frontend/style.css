@@ -24,6 +24,7 @@ body {
   align-items: center;
   gap: 20px;
   padding: 40px 20px 140px;
+  padding-bottom: 120px;
 }
 
 
@@ -47,6 +48,19 @@ body {
   display: flex;
   opacity: 1;
   pointer-events: auto;
+}
+
+#step3 {
+  min-height: 70vh;
+  padding-bottom: 110px;
+  box-sizing: border-box;
+}
+
+.genre-surprise-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+  margin-bottom: 60px;
 }
 
 
@@ -222,6 +236,44 @@ body {
   padding-top: 5px;
 }
 
+.choices.genres {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(120px, 1fr));
+  gap: 22px 32px; /* vertical x horizontal */
+  justify-content: center;
+  align-items: center;
+  padding: 8px 0 0 0;
+  margin-top: 8px;
+  margin-bottom: 0;
+  width: 100%;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Ajusta o tamanho do botão para não ficar tão alto/largo */
+.choices.genres .button3d {
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+  width: 100%;
+}
+
+.choices.genres .button3d button {
+  width: 100%;
+  padding: 18px 0;
+  font-size: 1.5rem;
+  min-width: 0;
+  min-height: 0;
+}
+
+/* Centraliza o botão surpresa (caveira) abaixo do grid */
+.genre-surprise-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+}
+
 
 .social {
   display: flex;
@@ -267,15 +319,7 @@ body {
 
 
 @media (max-width: 700px) {
-  .logo { width: 68vw !important; max-width: 200px !important; margin-bottom: 16px;}
-  .subtitle { font-size: 1.16rem; margin-bottom: 20px; }
-  .wrapper { margin-top: 0; margin-bottom: 0; }
-  .cta { font-size: 0.98rem; padding: 10px 10vw; }
-  .choices { gap: 10px; margin-top: 4px; }
-  .button3d button { font-size: 1.13rem; padding: 12px 10vw; }
-  .button3d:after { padding: 2px; bottom: -8px; left: -2px; border-radius: 9px; }
-  .centerbox { padding-bottom: 90px;}
-  .icon-bg { width: 40px; height: 40px;}
-  .social img { width: 18px; height: 18px;}
-  .social { gap: 18px; bottom: 8px; }
+  .centerbox, #step3 {
+    padding-bottom: 150px;
+  }
 }

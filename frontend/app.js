@@ -71,8 +71,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
   document.querySelectorAll('.choiceBtn').forEach(btn => {
     btn.addEventListener('click', function() {
-      // Aqui você pode adicionar lógica para etapa 3 se quiser
-      alert('Você escolheu: ' + btn.textContent);
+      // Avança para etapa 3 ao clicar em qualquer botão da etapa 2
+      showStep(3);
+    });
+  });
+
+  document.querySelectorAll('.genreBtn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      // Aqui você pode adicionar a lógica para a escolha do gênero
+      // alert('Você escolheu o gênero: ' + btn.textContent); //
+      // showStep(4); // Se houver uma etapa 4
     });
   });
 });
+
+function adjustPaddingForFooter() {
+  var footer = document.querySelector('.social');
+  var centerbox = document.querySelector('.centerbox');
+  if (footer && centerbox) {
+    var footerHeight = footer.offsetHeight + 32; // 32px de margem extra
+    centerbox.style.paddingBottom = footerHeight + 'px';
+  }
+}
+window.addEventListener('resize', adjustPaddingForFooter);
+window.addEventListener('DOMContentLoaded', adjustPaddingForFooter);
