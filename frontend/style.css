@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:900i');
-@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Quicksand:wght@600&family=Montserrat:wght@700&display=swap');
 
 * {
   box-sizing: border-box;
@@ -9,84 +9,93 @@ body {
   min-height: 100vh;
   margin: 0;
   padding: 0;
-  font-family: 'Poppins', Arial, sans-serif;
-  background: linear-gradient(120deg, #3a1c71 0%, #ff9900 100%);
+  font-family: 'Quicksand', 'Montserrat', Arial, sans-serif;
+  background: linear-gradient(145deg, #21035c 0%, #5e35b1 45%, #310052 100%);
   overflow-x: hidden;
   position: relative;
 }
 
-/* Estrelas animadas */
 .stars-bg {
   position: fixed;
   top: 0; left: 0; width: 100vw; height: 100vh;
   pointer-events: none;
   z-index: 0;
-  background: transparent;
-}
-.stars-bg:after {
-  content: "";
-  position: absolute; width: 100vw; height: 100vh;
-  background: 
-    radial-gradient(white 1px, transparent 1px) 0 0/50px 50px repeat,
-    radial-gradient(white 1px, transparent 1px) 25px 25px/50px 50px repeat;
-  opacity: 0.2;
-  animation: star-blink 2s infinite alternate;
-}
-@keyframes star-blink {
-  0% { opacity: 0.2; }
-  100% { opacity: 0.4; }
 }
 
 main.step-1 {
   position: relative;
   z-index: 1;
+  min-height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  min-height: 100vh;
-  width: 100vw;
-  padding-top: 40px;
+  justify-content: center; /* centraliza verticalmente todo conteúdo */
+  padding-top: 0;
 }
 
+/* LOGO COM ANIMAÇÃO */
 .logo {
   width: 340px;
-  max-width: 90vw;
-  margin-top: 30px;
-  margin-bottom: 40px;
+  max-width: 92vw;
+  margin-top: 24px;
+  margin-bottom: 34px;
   display: block;
+  filter: drop-shadow(0 12px 32px #a084e899) drop-shadow(0 2px 12px #000c);
+  animation: floatLogo 3.2s ease-in-out infinite alternate;
+  transition: filter 0.4s;
 }
 
-/* Subtítulo */
+@keyframes floatLogo {
+  0%   { transform: translateY(0px) scale(1);}
+  50%  { transform: translateY(-18px) scale(1.02);}
+  100% { transform: translateY(0px) scale(1);}
+}
+
+.logo:hover, .logo:focus {
+  filter: drop-shadow(0 18px 40px #fff6) drop-shadow(0 2px 18px #a084e8cc);
+}
+
 .subtitle {
-  font-family: 'Luckiest Guy', cursive, Arial, sans-serif;
-  font-size: 2rem;
-  color: #222;
-  margin-bottom: 60px;
+  font-family: 'Quicksand', 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 2.2rem;
+  color: #fff;
+  margin-bottom: 70px;
+  margin-top: 0;
   text-align: center;
-  text-shadow: 2px 2px 0 #fff6, 0 2px 8px #ff990099;
+  text-shadow: 0 3px 16px #000a, 0 1px 0 #a084e855;
+  letter-spacing: 1px;
+  animation: fadeIn 1.2s cubic-bezier(.42,0,.58,1) both;
+  max-width: 90vw;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(32px);}
+  to { opacity: 1; transform: translateY(0);}
 }
 
 .wrapper {
   display: flex;
   justify-content: center;
-  margin-bottom: 50px;
+  margin-bottom: 60px;
+  width: 100%;
 }
 
-/* BOTÃO ANIMADO */
+/* BOTÃO MAIS ESCURO */
 .cta {
   display: flex;
   align-items: center;
-  padding: 12px 56px;
+  padding: 14px 56px;
   text-decoration: none;
-  font-family: 'Luckiest Guy', 'Poppins', sans-serif;
+  font-family: 'Luckiest Guy', 'Montserrat', cursive, sans-serif;
   font-size: 2.3rem;
   letter-spacing: 1px;
   color: #fff;
-  background: #ff9900;
+  background: #b36a03; /* laranja mais escuro */
   border: none;
   border-radius: 14px;
-  transition: box-shadow 0.4s, transform 0.2s;
+  transition: box-shadow 0.4s, transform 0.2s, background 0.3s;
   box-shadow: 7px 7px 0 #222;
   transform: skewX(-10deg);
   position: relative;
@@ -100,7 +109,8 @@ main.step-1 {
 }
 
 .cta:hover {
-  box-shadow: 13px 13px 0 #fbc638;
+  box-shadow: 13px 13px 0 #ffd580;
+  background: #ff9900; /* laranja vivo no hover */
   transition: 0.3s;
 }
 
@@ -138,13 +148,13 @@ path.two {
 
 .cta:hover path.three {
   animation: color_anim 1s infinite 0.2s;
-  fill: #fbc638;
+  fill: #ffd580;
 }
 
 .cta:hover path.one {
   transform: translateX(0%);
   animation: color_anim 1s infinite 0.6s;
-  fill: #fbc638;
+  fill: #fff;
 }
 
 .cta:hover path.two {
@@ -153,30 +163,69 @@ path.two {
   fill: #fff;
 }
 
-/* SVG animations */
 @keyframes color_anim {
   0% { fill: #fff; }
-  50% { fill: #fbc638; }
+  50% { fill: #ffd580; }
   100% { fill: #fff; }
 }
 
-/* Social icons */
+/* Redes sociais - nova aparência */
 .social {
   display: flex;
-  gap: 28px;
-  margin-top: 70px;
+  gap: 40px;
+  margin-top: auto;
+  margin-bottom: 46px;
   justify-content: center;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 32px;
+  z-index: 1;
 }
-.social a {
-  display: inline-block;
-  transition: transform 0.2s;
+
+.icon-bg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  background: #222;
+  border-radius: 50%;
+  box-shadow: 0 2px 18px #0005;
+  transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+  border: 3px solid #fff3;
 }
-.social a:hover {
-  transform: scale(1.18);
-  filter: drop-shadow(0 0 8px #fff2) drop-shadow(0 2px 8px #2222);
-}
+.github-bg { background: #181717; }
+.linkedin-bg { background: #0A66C2; }
+
 .social img {
-  width: 46px;
-  height: 46px;
-  display: block;
+  width: 30px;
+  height: 30px;
+  filter: invert(1) drop-shadow(0 0 4px #fff5);
+  transition: filter 0.3s;
+}
+
+.social a:hover .icon-bg,
+.social a:focus .icon-bg {
+  background: #fff;
+  box-shadow: 0 4px 30px #ff9900aa, 0 1px 8px #0005;
+  transform: scale(1.18) rotate(-6deg);
+}
+.social a.github:hover .github-bg { background: #ff9900; }
+.social a.linkedin:hover .linkedin-bg { background: #ff9900; }
+.social a.github:focus .github-bg { background: #ff9900; }
+.social a.linkedin:focus .linkedin-bg { background: #ff9900; }
+.social a:hover img,
+.social a:focus img {
+  filter: invert(0) brightness(1.5) drop-shadow(0 0 8px #ff9900cc);
+}
+
+@media (max-width: 600px) {
+  .subtitle { font-size: 1.25rem; }
+  .logo { width: 92vw; }
+  .cta { font-size: 1.3rem; padding: 12px 14vw; }
+  .icon-bg { width: 42px; height: 42px;}
+  .social img { width: 22px; height: 22px;}
+  .social { gap: 20px; bottom: 12px; }
+  main.step-1 { padding-top: 0; }
 }

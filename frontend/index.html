@@ -4,12 +4,10 @@
   <meta charset="UTF-8">
   <title>What To Watch?</title>
   <link rel="stylesheet" href="style.css">
-  <!-- Fonte cartoon para título/botão -->
-  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Poppins:900i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Quicksand:wght@600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="stars-bg"></div>
+  <div class="stars-bg" id="stars-bg"></div>
   <main class="step step-1" id="step1">
     <img src="assets/logo.png" alt="What To Watch logo" class="logo" />
     <h2 class="subtitle">Que tal uma ajuda para escolher o que assistir?</h2>
@@ -29,12 +27,46 @@
     </div>
     <div class="social">
       <a href="https://github.com/sql1freitas" class="github" target="_blank" aria-label="GitHub">
-        <img src="assets/github.svg" alt="GitHub"/>
+        <span class="icon-bg github-bg">
+          <img src="assets/github.svg" alt="GitHub"/>
+        </span>
       </a>
       <a href="https://www.linkedin.com/in/matheus-java-dev/" class="linkedin" target="_blank" aria-label="LinkedIn">
-        <img src="assets/linkedin.svg" alt="LinkedIn"/>
+        <span class="icon-bg linkedin-bg">
+          <img src="assets/linkedin.svg" alt="LinkedIn"/>
+        </span>
       </a>
     </div>
   </main>
+  <script>
+    // Cria estrelas randômicas
+    function createRandomStars(numStars, containerId) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      container.innerHTML = '';
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      for (let i = 0; i < numStars; i++) {
+        const star = document.createElement('div');
+        const size = Math.random() * 1.4 + 0.5; // de 0.5 a 1.9px
+        star.style.position = 'absolute';
+        star.style.left = `${Math.random() * width}px`;
+        star.style.top = `${Math.random() * height}px`;
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+        star.style.borderRadius = '50%';
+        star.style.background = `rgba(255,255,255,${0.35 + Math.random()*0.25})`;
+        star.style.boxShadow = `0 0 ${Math.random()*8+2}px ${Math.random()*1.1}px rgba(255,255,255,0.5)`;
+        star.style.zIndex = 0;
+        star.style.opacity = 0.65 + Math.random() * 0.3;
+        container.appendChild(star);
+      }
+    }
+    function initStars() {
+      createRandomStars(100, 'stars-bg');
+    }
+    window.addEventListener('DOMContentLoaded', initStars);
+    window.addEventListener('resize', () => setTimeout(initStars, 200));
+  </script>
 </body>
 </html>
