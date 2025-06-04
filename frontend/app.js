@@ -94,5 +94,9 @@ document.addEventListener('DOMContentLoaded', function() {
       showStep(4);
     });
   });
+  
+  document.getElementById('homeBtn').onclick = function() {
+  showStep(1);
+  };
 });
 

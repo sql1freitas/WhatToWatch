@@ -445,3 +445,33 @@ body {
     font-size: 0.98rem;
   }
 }
+
+#step4 .button3d {
+  min-width: 130px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#homeBtn {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  width: 60px;
+  cursor: pointer;
+  outline: none;
+}
+
+#homeBtn svg {
+  width: 38px;
+  height: 38px;
+  display: block;
+}
+
+#homeBtn:active svg path {
+  filter: brightness(0.85);
+}
