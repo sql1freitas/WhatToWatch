@@ -10,7 +10,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Quicksand', 'Montserrat', Arial, sans-serif;
-  background: linear-gradient(145deg, #5e35b1 0%, #a084e8 45%, #310052 100%);
+  background: linear-gradient(145deg, #2d0381 0%, #6037c7 45%, #310052 100%);
   overflow-x: hidden;
   position: relative;
 }
