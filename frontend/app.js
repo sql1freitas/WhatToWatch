@@ -85,7 +85,7 @@ async function sortearFilme() {
   document.getElementById('loader').style.display = 'flex';
   try {
     const anteriores = filmesJaSorteados.join(',');
-    const url = `/api/sortear?perfil=${perfilSelecionado}&genero=${generoSelecionado}&anteriores=${anteriores}`;
+    const url = `http://localhost:8000/api/sortear?perfil=${perfilSelecionado}&genero=${generoSelecionado}&anteriores=${anteriores}`;
     const resp = await fetch(url);
     if (!resp.ok) throw new Error('Nenhum filme encontrado.');
     const filme = await resp.json();

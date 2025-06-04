@@ -8,13 +8,14 @@ import tmdbsimple as tmdb
 load_dotenv()
 
 TMDB_API_KEY = os.getenv("TMDB_API_KEY")
+print("DEBUG: TMDB_API_KEY =", TMDB_API_KEY)
+
 if not TMDB_API_KEY:
     raise RuntimeError("TMDB_API_KEY não definida no .env")
 
 tmdb.API_KEY = TMDB_API_KEY
 
 app = FastAPI()
-
 
 app.add_middleware(
     CORSMiddleware,
@@ -23,13 +24,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 PROFILE_RATINGS = {
     "critica": 8.0,
     "bom-gosto": 6.5,
     "tanto-faz": 5.5
 }
-
 
 GENRES = {
     "acao": 28,
@@ -43,7 +42,6 @@ GENRES = {
     "surpresa": "trash"
 }
 
-
 TRASH_KEYWORDS = ["trash", "bad movie", "cult", "so bad it's good"]
 
 @app.get("/api/sortear")
@@ -52,47 +50,71 @@ def sortear_filme(
     genero: str = Query(..., regex="^(acao|comedia|terror|suspense|drama|aventura|romance|scifi|surpresa)$"),
     anteriores: str = ""
 ):
-    nota_min = PROFILE_RATINGS[perfil]
+    nota_min = PROFILE_RATINGS.get(perfil, 0)
     anteriores_ids = set(int(x) for x in anteriores.split(",") if x.isdigit())
 
-    
-    if genero == "surpresa":
-        
-        results = []
-        for keyword in TRASH_KEYWORDS:
-            search = tmdb.Search()
-            response = search.movie(query=keyword)
-            results += search.results
-        
-        seen = set()
-        filtered = []
-        for movie in results:
-            if movie['id'] not in seen and movie.get('vote_average', 0) >= nota_min:
-                filtered.append(movie)
-                seen.add(movie['id'])
-        filmes = filtered
-    else:
-        genre_id = GENRES[genero]
-        discover = tmdb.Discover()
-        response = discover.movie(
-            with_genres=genre_id,
-            vote_average_gte=nota_min,
-            sort_by="popularity.desc",
-            language="pt-BR"
-        )
-        filmes = [f for f in discover.results if f.get('vote_average', 0) >= nota_min]
+    print(f"\nDEBUG: Parâmetros recebidos - perfil: {perfil}, genero: {genero}, nota_min: {nota_min}, anteriores: {anteriores_ids}")
 
-    
-    filmes = [f for f in filmes if f['id'] not in anteriores_ids][:30]
-    if not filmes:
-        raise HTTPException(status_code=404, detail="Nenhum filme encontrado para este filtro.")
+    filmes = []
 
-    filme = random.choice(filmes)
-    return {
-        "id": filme["id"],
-        "title": filme.get("title"),
-        "poster_path": f"https://image.tmdb.org/t/p/w500{filme['poster_path']}" if filme.get("poster_path") else None,
-        "vote_average": filme.get("vote_average"),
-        "overview": filme.get("overview"),
-        "release_date": filme.get("release_date")
-    }
+    try:
+        if genero == "surpresa":
+            print("DEBUG: Modo TRASH ativado!")
+            results = []
+            for keyword in TRASH_KEYWORDS:
+                print(f"DEBUG: Buscando keyword: {keyword}")
+                search = tmdb.Search()
+                response = search.movie(query=keyword)
+                print(f"DEBUG: {len(search.results)} resultados para {keyword}")
+                results += search.results
+            seen = set()
+            filtered = []
+            for movie in results:
+                if movie['id'] not in seen and movie.get('vote_average', 0) >= nota_min:
+                    filtered.append(movie)
+                    seen.add(movie['id'])
+            filmes = filtered
+            print(f"DEBUG: {len(filmes)} filmes 'trash' após filtro de nota")
+        else:
+            genre_id = GENRES[genero]
+            filmes = []
+            page = 1
+            max_pages = 3
+            while len(filmes) < 30 and page <= max_pages:
+                discover = tmdb.Discover()
+                response = discover.movie(
+                    with_genres=genre_id,
+                    vote_average_gte=nota_min,
+                    sort_by="popularity.desc",
+                    language="pt-BR",
+                    page=page
+                )
+                print(f"DEBUG: Página {page} - {len(discover.results)} resultados brutos do TMDB")
+                page_filmes = [f for f in discover.results if f.get('vote_average', 0) >= nota_min and f['id'] not in anteriores_ids]
+                print(f"DEBUG: Página {page} - {len(page_filmes)} filmes após filtro de nota/anteriores")
+                filmes += page_filmes
+                page += 1
+
+            print(f"DEBUG: Total filmes após busca e filtro: {len(filmes)}")
+
+        
+        filmes = [f for f in filmes if f['id'] not in anteriores_ids][:30]
+        print(f"DEBUG: Filmes finais disponíveis para sorteio: {len(filmes)}")
+        if not filmes:
+            print("DEBUG: Nenhum filme encontrado para os filtros.")
+            raise HTTPException(status_code=404, detail="Nenhum filme encontrado para este filtro.")
+
+        filme = random.choice(filmes)
+        print(f"DEBUG: Filme sorteado: {filme.get('title')} (ID {filme.get('id')})")
+
+        return {
+            "id": filme["id"],
+            "title": filme.get("title"),
+            "poster_path": f"https://image.tmdb.org/t/p/w500{filme['poster_path']}" if filme.get("poster_path") else None,
+            "vote_average": filme.get("vote_average"),
+            "overview": filme.get("overview"),
+            "release_date": filme.get("release_date")
+        }
+    except Exception as e:
+        print("DEBUG: Exceção ao buscar filmes:", e)
+        raise HTTPException(status_code=500, detail="Erro ao buscar filmes. Veja logs do servidor.")
