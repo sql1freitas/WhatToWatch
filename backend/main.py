@@ -44,7 +44,7 @@ GENRES = {
 
 TRASH_KEYWORDS = ["trash", "bad movie", "cult", "so bad it's good"]
 
-MIN_VOTE_COUNT = 100000
+MIN_VOTE_COUNT = 250000
 
 @app.get("/api/sortear")
 def sortear_filme(
