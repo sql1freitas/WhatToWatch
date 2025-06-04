@@ -12,6 +12,29 @@ A ideia é entregar uma experiência divertida e intuitiva pra quem quer uma aju
 
 ---
 
+## ⚙️ Tecnologias utilizadas
+
+### Backend
+- **[Python 3.11+]**
+- **FastAPI** — Framework web moderno e rápido para APIs REST.
+- **Uvicorn** — Servidor ASGI para rodar o FastAPI.
+- **python-dotenv** — Gerenciamento de variáveis de ambiente.
+- **tmdbsimple** — Cliente Python para acessar a [API do TMDB](https://www.themoviedb.org/documentation/api).
+- **python-multipart** — Suporte para uploads (caso precise).
+- **requests** — Para requisições HTTP adicionais.
+
+### Frontend
+- **HTML5** — Estrutura da página.
+- **CSS3** — Visual, animações, responsividade, gradientes e estrelas animadas.
+- **JavaScript** — Geração dinâmica das estrelas de fundo.
+
+### Outras
+- **API do TMDB (The Movie Database)** — Fonte dos filmes, séries e sugestões.  
+- **Docker** (opcional) — Para facilitar a execução e deploy do projeto.
+
+---
+
+
 ## 🛠️ Como rodar o projeto
 
 ### 1. Clone o repositório
