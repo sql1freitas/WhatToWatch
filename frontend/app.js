@@ -52,9 +52,18 @@ window.addEventListener('resize', () => setTimeout(initStars, 200));
 
 
 function showStep(stepNumber) {
+  const loader = document.getElementById('loader');
+  loader.style.display = 'flex';
+
   document.querySelectorAll('.step').forEach((el, idx) => {
-    el.classList.toggle('active', idx === stepNumber - 1);
+    el.classList.remove('active');
   });
+  setTimeout(() => {
+    document.querySelectorAll('.step').forEach((el, idx) => {
+      el.classList.toggle('active', idx === stepNumber - 1);
+    });
+    loader.style.display = 'none';
+  } , 700);
   const socialFooter = document.getElementById('social-footer');
   if (socialFooter) {
     if (stepNumber === 1) {
