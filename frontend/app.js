@@ -64,6 +64,7 @@ function showStep(stepNumber) {
     });
     loader.style.display = 'none';
   } , 700);
+
   const socialFooter = document.getElementById('social-footer');
   if (socialFooter) {
     if (stepNumber === 1) {
@@ -75,8 +76,46 @@ function showStep(stepNumber) {
 }
 
 
+let perfilSelecionado = '';
+let generoSelecionado = '';
+let filmesJaSorteados = [];
+
+
+async function sortearFilme() {
+  document.getElementById('loader').style.display = 'flex';
+  try {
+    const anteriores = filmesJaSorteados.join(',');
+    const url = `/api/sortear?perfil=${perfilSelecionado}&genero=${generoSelecionado}&anteriores=${anteriores}`;
+    const resp = await fetch(url);
+    if (!resp.ok) throw new Error('Nenhum filme encontrado.');
+    const filme = await resp.json();
+
+
+    filmesJaSorteados.push(filme.id);
+
+
+    document.querySelector('.movie-title').innerText = filme.title || '[Título do Filme]';
+    document.querySelector('.movie-poster').src = filme.poster_path || 'https://via.placeholder.com/320x460?text=Poster+do+Filme';
+    document.querySelector('.movie-poster').alt = filme.title || 'Poster do filme';
+
+
+    if (document.querySelector('.movie-overview'))
+      document.querySelector('.movie-overview').innerText = filme.overview || '';
+    if (document.querySelector('.movie-vote'))
+      document.querySelector('.movie-vote').innerText = filme.vote_average ? `Nota: ${filme.vote_average}` : '';
+    if (document.querySelector('.movie-date'))
+      document.querySelector('.movie-date').innerText = filme.release_date ? `Lançamento: ${filme.release_date}` : '';
+  } catch (err) {
+    alert('Não foi possível encontrar um filme para esse perfil/gênero. Tente novamente!');
+  } finally {
+    document.getElementById('loader').style.display = 'none';
+  }
+}
+
+
 document.addEventListener('DOMContentLoaded', function() {
   showStep(1);
+
 
   document.getElementById('escolherBtn').onclick = function(e) {
     e.preventDefault();
@@ -85,18 +124,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
   document.querySelectorAll('.choiceBtn').forEach(btn => {
     btn.addEventListener('click', function() {
+      perfilSelecionado = this.dataset.choice;
       showStep(3);
     });
   });
 
   document.querySelectorAll('.genreBtn').forEach(btn => {
-    btn.addEventListener('click', function() {
+    btn.addEventListener('click', async function() {
+      generoSelecionado = this.dataset.genre;
+      filmesJaSorteados = [];
+      await sortearFilme();
       showStep(4);
     });
   });
-  
+
+  document.getElementById('rerollBtn').onclick = async function() {
+    await sortearFilme();
+  };
+
   document.getElementById('homeBtn').onclick = function() {
-  showStep(1);
+    perfilSelecionado = '';
+    generoSelecionado = '';
+    filmesJaSorteados = [];
+    showStep(1);
   };
 });
-
