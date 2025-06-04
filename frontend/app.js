@@ -55,7 +55,7 @@ function showStep(stepNumber) {
   document.querySelectorAll('.step').forEach((el, idx) => {
     el.classList.toggle('active', idx === stepNumber - 1);
   });
-  const socialFooter = document.getElementById('social');
+  const socialFooter = document.getElementById('social-footer');
   if (socialFooter) {
     if (stepNumber === 1) {
       socialFooter.style.display = 'flex';
