@@ -10,7 +10,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Quicksand', 'Montserrat', Arial, sans-serif;
-  background: linear-gradient(145deg, #21035c 0%, #5e35b1 45%, #310052 100%);
+  background: linear-gradient(145deg, #5e35b1 0%, #a084e8 45%, #310052 100%);
   overflow-x: hidden;
   position: relative;
 }
@@ -33,6 +33,7 @@ main.step-1 {
   justify-content: center;
   padding-top: 0;
 }
+
 
 .logo {
   width: 340px;
@@ -81,6 +82,7 @@ main.step-1 {
   width: 100%;
 }
 
+
 .cta {
   display: flex;
   align-items: center;
@@ -90,14 +92,14 @@ main.step-1 {
   font-size: 2.3rem;
   letter-spacing: 1px;
   color: #fff;
-  background: #ff8800;
+  background: #b36a03;
   border: none;
   border-radius: 14px;
   transition: box-shadow 0.4s, transform 0.2s, background 0.3s;
   box-shadow: 7px 7px 0 #222;
   transform: skewX(-10deg);
   position: relative;
-  text-shadow: 2px 2px 0 #222, 0 2px 8px #361f00;
+  text-shadow: 2px 2px 0 #222, 0 2px 8px #ff990099;
   cursor: pointer;
   outline: none;
 }
@@ -107,8 +109,8 @@ main.step-1 {
 }
 
 .cta:hover {
-  box-shadow: 13px 13px 0 #fdb530;
-  background: #ff8800;
+  box-shadow: 13px 13px 0 #ffd580;
+  background: #ff9900;
   transition: 0.3s;
 }
 
@@ -132,6 +134,7 @@ main.step-1 {
   top: 10%;
 }
 
+
 path.one, path.two, path.three {
   transition: 0.4s;
   fill: #fff;
@@ -145,7 +148,7 @@ path.two {
 
 .cta:hover path.three {
   animation: color_anim 1s infinite 0.2s;
-  fill: #ffab04;
+  fill: #ffd580;
 }
 
 .cta:hover path.one {
@@ -165,6 +168,7 @@ path.two {
   50% { fill: #ffd580; }
   100% { fill: #fff; }
 }
+
 
 .social {
   display: flex;
@@ -216,12 +220,64 @@ path.two {
   filter: invert(0) brightness(1.5) drop-shadow(0 0 8px #ff9900cc);
 }
 
+
 @media (max-width: 600px) {
-  .subtitle { font-size: 1.25rem; }
-  .logo { width: 92vw; }
-  .cta { font-size: 1.3rem; padding: 12px 14vw; }
-  .icon-bg { width: 42px; height: 42px;}
-  .social img { width: 22px; height: 22px;}
-  .social { gap: 20px; bottom: 12px; }
-  main.step-1 { padding-top: 0; }
+  main.step-1 {
+    display: block;
+    min-height: 100vh;
+    padding-top: 32px;
+    width: 100vw;
+  }
+
+  .logo {
+    max-width: none;
+    margin-top: 0;
+    margin-bottom: 18px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    animation: floatLogoMobile 3.2s ease-in-out infinite alternate;
+  }
+  @keyframes floatLogoMobile {
+    0%   { transform: translateY(0px) scale(1.18);}
+    50%  { transform: translateY(-8px) scale(1.23);}
+    100% { transform: translateY(0px) scale(1.18);}
+  }
+
+  .subtitle {
+    font-size: 1.18rem;
+    margin-bottom: 28px;
+    margin-top: 0;
+    padding: 0 6vw;
+    line-height: 1.38;
+    max-width: 98vw;
+    text-align: center;
+  }
+
+  .wrapper {
+    margin-bottom: 32px;
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+  }
+
+  .cta {
+    font-size: 1.15rem;
+    padding: 13px 19vw;
+    border-radius: 11px;
+    box-shadow: 4px 4px 0 #222;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cta span:nth-child(2) {
+    width: 18px;
+    margin-left: 16px;
+    top: 7%;
+  }
+
+  .icon-bg { width: 40px; height: 40px;}
+  .social img { width: 18px; height: 18px;}
+  .social { gap: 18px; bottom: 8px; }
 }

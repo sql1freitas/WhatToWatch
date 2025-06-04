@@ -2,16 +2,29 @@ function createAnimatedStars(numStars, containerId) {
   const container = document.getElementById(containerId);
   if (!container) return;
   container.innerHTML = '';
+
+
+  const isMobile = window.innerWidth <= 600;
+
   const width = window.innerWidth;
   const height = window.innerHeight;
   const stars = [];
   for (let i = 0; i < numStars; i++) {
     const star = document.createElement('div');
-    const size = Math.random() * 1.4 + 0.5; 
-    const baseX = Math.random() * width;
-    const baseY = Math.random() * height;
+    const size = Math.random() * 1.4 + 0.5;
+
     
-    const floatRadius = Math.random() * 16 + 6;
+    let baseX, baseY;
+    if (isMobile) {
+      baseX = Math.random() * width * 0.9 + width * 0.05; 
+      baseY = Math.random() * height * 0.9 + height * 0.05;
+    } else {
+      baseX = Math.random() * width;
+      baseY = Math.random() * height;
+    }
+
+    
+    const floatRadius = Math.random() * 16 + 6; 
     const floatSpeed = (Math.random() * 0.7 + 0.2) * (Math.random() < 0.5 ? 1 : -1);
     const angle = Math.random() * Math.PI * 2;
     star.style.position = 'absolute';
@@ -35,7 +48,7 @@ function createAnimatedStars(numStars, containerId) {
 
   function animateStars(time) {
     for (const s of stars) {
-      
+     
       const t = (time || 0) * 0.00025 * s.floatSpeed + s.angle;
       const x = s.baseX + Math.cos(t) * s.floatRadius;
       const y = s.baseY + Math.sin(t) * s.floatRadius;
