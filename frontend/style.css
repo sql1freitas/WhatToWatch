@@ -30,11 +30,10 @@ main.step-1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* centraliza verticalmente todo conteúdo */
+  justify-content: center;
   padding-top: 0;
 }
 
-/* LOGO COM ANIMAÇÃO */
 .logo {
   width: 340px;
   max-width: 92vw;
@@ -82,7 +81,6 @@ main.step-1 {
   width: 100%;
 }
 
-/* BOTÃO MAIS ESCURO */
 .cta {
   display: flex;
   align-items: center;
@@ -92,7 +90,7 @@ main.step-1 {
   font-size: 2.3rem;
   letter-spacing: 1px;
   color: #fff;
-  background: #b36a03; /* laranja mais escuro */
+  background: #b36a03;
   border: none;
   border-radius: 14px;
   transition: box-shadow 0.4s, transform 0.2s, background 0.3s;
@@ -110,7 +108,7 @@ main.step-1 {
 
 .cta:hover {
   box-shadow: 13px 13px 0 #ffd580;
-  background: #ff9900; /* laranja vivo no hover */
+  background: #ff9900;
   transition: 0.3s;
 }
 
@@ -134,7 +132,6 @@ main.step-1 {
   top: 10%;
 }
 
-/* SVG Animação com as cores do layout */
 path.one, path.two, path.three {
   transition: 0.4s;
   fill: #fff;
@@ -169,7 +166,6 @@ path.two {
   100% { fill: #fff; }
 }
 
-/* Redes sociais - nova aparência */
 .social {
   display: flex;
   gap: 40px;
