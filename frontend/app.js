@@ -1,4 +1,4 @@
-// Fundo de estrelas animadas
+
 function createAnimatedStars(numStars, containerId) {
   const container = document.getElementById(containerId);
   if (!container) return;
@@ -50,7 +50,7 @@ function initStars() {
 window.addEventListener('DOMContentLoaded', initStars);
 window.addEventListener('resize', () => setTimeout(initStars, 200));
 
-// Troca de etapas (apenas uma aparece!)
+
 function showStep(stepNum) {
   document.querySelectorAll('.step').forEach((s, idx) => {
     if ((idx+1) === stepNum) {
@@ -62,7 +62,7 @@ function showStep(stepNum) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  showStep(1); // Só step1 aparece inicialmente
+  showStep(1);
 
   document.getElementById('escolherBtn').onclick = function(e) {
     e.preventDefault();
