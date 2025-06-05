@@ -80,12 +80,6 @@ Pode abrir uma issue, mandar um pull request ou só trocar uma ideia.
 
 ---
 
-## 📝 Licença
-
-Esse projeto é livre, pode usar, modificar e compartilhar.
-
----
-
 ## 🚀 Autor
 
 Feito com 💜 por [@sql1freitas](https://github.com/sql1freitas)
