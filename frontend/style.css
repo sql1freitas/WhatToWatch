@@ -71,7 +71,7 @@ body {
   margin-bottom: 0;
 }
 
-/* Botão CTA (Etapa 1) */
+
 .cta {
   display: flex;
   align-items: center;
@@ -495,4 +495,27 @@ body {
 
 #homeBtn:focus {
   outline: 2px solid #fff;
+}
+
+.streaming-icons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  margin: 12px auto;
+  flex-wrap: wrap;
+  max-width: 90vw;
+}
+
+.streaming-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0 2px 6px #0005;
+  transition: transform 0.2s;
+}
+.streaming-icon:hover {
+  transform: scale(1.1);
 }

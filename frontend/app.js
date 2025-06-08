@@ -1,4 +1,3 @@
-
 function createAnimatedStars(numStars, containerId) {
   const container = document.getElementById(containerId);
   if (!container) return;
@@ -44,12 +43,12 @@ function createAnimatedStars(numStars, containerId) {
   }
   animateStars();
 }
+
 function initStars() {
   createAnimatedStars(100, 'stars-bg');
 }
 window.addEventListener('DOMContentLoaded', initStars);
 window.addEventListener('resize', () => setTimeout(initStars, 200));
-
 
 function showStep(stepNumber) {
   const loader = document.getElementById('loader');
@@ -75,11 +74,9 @@ function showStep(stepNumber) {
   }
 }
 
-
 let perfilSelecionado = '';
 let generoSelecionado = '';
 let filmesJaSorteados = [];
-
 
 async function sortearFilme() {
   document.getElementById('loader').style.display = 'flex';
@@ -90,14 +87,11 @@ async function sortearFilme() {
     if (!resp.ok) throw new Error('Nenhum filme encontrado.');
     const filme = await resp.json();
 
-
     filmesJaSorteados.push(filme.id);
-
 
     document.querySelector('.movie-title').innerText = filme.title || '[Título do Filme]';
     document.querySelector('.movie-poster').src = filme.poster_path || 'https://via.placeholder.com/320x460?text=Poster+do+Filme';
     document.querySelector('.movie-poster').alt = filme.title || 'Poster do filme';
-
 
     if (document.querySelector('.movie-overview'))
       document.querySelector('.movie-overview').innerText = filme.overview || '';
@@ -105,17 +99,35 @@ async function sortearFilme() {
       document.querySelector('.movie-vote').innerText = filme.vote_average ? `Nota: ${filme.vote_average}` : '';
     if (document.querySelector('.movie-date'))
       document.querySelector('.movie-date').innerText = filme.release_date ? `Lançamento: ${filme.release_date}` : '';
+
+    const iconsContainer = document.getElementById('streaming-icons');
+    iconsContainer.innerHTML = '';
+
+    console.log("Providers recebidos:", filme.providers);
+
+    if (filme.providers && filme.providers.length > 0) {
+      filme.providers.forEach(p => {
+        if (p.logo_path) {
+          const img = document.createElement('img');
+          img.src = p.logo_path;
+          img.alt = p.provider_name;
+          img.title = p.provider_name;
+          img.className = 'streaming-icon';
+          img.referrerPolicy = "no-referrer";
+          iconsContainer.appendChild(img);
+        }
+      });
+    }
   } catch (err) {
+    console.error(err);
     alert('Não foi possível encontrar um filme para esse perfil/gênero. Tente novamente!');
   } finally {
     document.getElementById('loader').style.display = 'none';
   }
 }
 
-
 document.addEventListener('DOMContentLoaded', function() {
   showStep(1);
-
 
   document.getElementById('escolherBtn').onclick = function(e) {
     e.preventDefault();

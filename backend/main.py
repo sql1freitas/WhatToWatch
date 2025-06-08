@@ -117,6 +117,23 @@ def sortear_filme(
         filme = random.choice(filmes)
         print(f"DEBUG: Filme sorteado: {filme.get('title')} (ID {filme.get('id')})")
 
+        
+        providers_data = {}
+        try:
+            providers_resp = tmdb.Movies(filme["id"]).watch_providers()
+            br_providers = providers_resp.get('results', {}).get('BR', {})
+            flatrate = br_providers.get('flatrate', [])
+            providers_data = [
+                {
+                    "provider_name": p.get("provider_name"),
+                    "logo_path": f"https://image.tmdb.org/t/p/original{p.get('logo_path')}" if p.get("logo_path") else None
+                }
+                for p in flatrate
+            ]
+        except Exception as e:
+            print(f"DEBUG: Falha ao buscar provedores: {e}")
+
+
         return {
             "id": filme["id"],
             "title": filme.get("title"),
@@ -124,7 +141,8 @@ def sortear_filme(
             "vote_average": filme.get("vote_average"),
             "vote_count": filme.get("vote_count"),
             "overview": filme.get("overview"),
-            "release_date": filme.get("release_date")
+            "release_date": filme.get("release_date"),
+            "providers": providers_data
         }
     except Exception as e:
         print("DEBUG: Exceção ao buscar filmes:", e)
