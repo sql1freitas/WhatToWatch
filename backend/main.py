@@ -41,7 +41,7 @@ GENRES = {
     "surpresa": "trash"
 }
 
-TRASH_KEYWORDS = ["sharknado","critters","birdemic","piranha","thing","killer tomatoes", "rubber", "Killer Klowns", "Evil Dead", "terrifier"]
+TRASH_KEYWORDS = ["sharknado","critters","birdemic","piranha","the thing","killer tomatoes", "rubber", "Killer Klowns", "Evil Dead", "terrifier"]
 
 MIN_VOTE_COUNT = 200
 
