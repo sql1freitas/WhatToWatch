@@ -8,7 +8,6 @@ import tmdbsimple as tmdb
 load_dotenv()
 
 TMDB_API_KEY = os.getenv("TMDB_API_KEY")
-print("DEBUG: TMDB_API_KEY =", TMDB_API_KEY)
 
 if not TMDB_API_KEY:
     raise RuntimeError("TMDB_API_KEY não definida no .env")
@@ -42,9 +41,9 @@ GENRES = {
     "surpresa": "trash"
 }
 
-TRASH_KEYWORDS = ["trash", "bad movie", "cult", "so bad it's good"]
+TRASH_KEYWORDS = ["sharknado","critters","birdemic","piranha","thing","killer tomatoes", "rubber", "Killer Klowns", "Evil Dead", "terrifier"]
 
-MIN_VOTE_COUNT = 250000
+MIN_VOTE_COUNT = 200
 
 @app.get("/api/sortear")
 def sortear_filme(
@@ -74,7 +73,6 @@ def sortear_filme(
             for movie in results:
                 if (
                     movie['id'] not in seen
-                    and movie.get('vote_average', 0) >= nota_min
                     and movie.get('vote_count', 0) >= MIN_VOTE_COUNT
                 ):
                     filtered.append(movie)
@@ -93,7 +91,7 @@ def sortear_filme(
                     vote_average_gte=nota_min,
                     vote_count_gte=MIN_VOTE_COUNT,
                     sort_by="popularity.desc",
-                    language="pt-BR",
+                    language="en-US",
                     page=page
                 )
                 print(f"DEBUG: Página {page} - {len(discover.results)} resultados brutos do TMDB")
