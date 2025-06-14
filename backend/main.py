@@ -60,12 +60,12 @@ def sortear_filme(
 
     try:
         if genero == "surpresa":
-            print("DEBUG: Modo TRASH ativado!")
+            print("DEBUG: Modo TRASH ativado")
             results = []
             for keyword in TRASH_KEYWORDS:
                 print(f"DEBUG: Buscando keyword: {keyword}")
                 search = tmdb.Search()
-                response = search.movie(query=keyword)
+                response = search.movie(query=keyword, language="pt-BR")
                 print(f"DEBUG: {len(search.results)} resultados para {keyword}")
                 results += search.results
             seen = set()
@@ -91,7 +91,7 @@ def sortear_filme(
                     vote_average_gte=nota_min,
                     vote_count_gte=MIN_VOTE_COUNT,
                     sort_by="popularity.desc",
-                    language="en-US",
+                    language="pt-BR",
                     page=page
                 )
                 print(f"DEBUG: Página {page} - {len(discover.results)} resultados brutos do TMDB")

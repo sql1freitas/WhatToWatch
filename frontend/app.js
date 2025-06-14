@@ -100,6 +100,23 @@ async function sortearFilme() {
     if (document.querySelector('.movie-date'))
       document.querySelector('.movie-date').innerText = filme.release_date ? `Lançamento: ${filme.release_date}` : '';
 
+    const synopsisBtn = document.getElementById('toggleSynopsisBtn');
+const synopsisText = document.getElementById('synopsisText');
+
+synopsisText.style.display = 'none';
+synopsisBtn.innerText = 'VER SINOPSE';
+
+synopsisBtn.onclick = function () {
+  if (synopsisText.style.display === 'none') {
+    synopsisText.style.display = 'block';
+    synopsisBtn.innerText = 'ESCONDER SINOPSE';
+  } else {
+    synopsisText.style.display = 'none';
+    synopsisBtn.innerText = 'VER SINOPSE';
+  }
+};
+
+
     const iconsContainer = document.getElementById('streaming-icons');
     iconsContainer.innerHTML = '';
 
